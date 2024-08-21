@@ -177,8 +177,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 		if self.algorithmWidget is not None:
 			self.verticalLayout_2.removeWidget(self.algorithmWidget);
 			self.algorithmWidget.deleteLater()
-		self.activeAlgorithm = [x for x in self.algorithms if x['label']==self.algorithmComboBox.currentText()][0]
-		
+		filtered_algorithms = [x for x in self.algorithms if x['label'] == self.algorithmComboBox.currentText()]
+		if not filtered_algorithms:
+			return
+		self.activeAlgorithm = filtered_algorithms[0]
 		cls = globals()[self.activeAlgorithm['controller']]
 		self.algorithmWidget = cls()
 		self.verticalLayout_2.addWidget(self.algorithmWidget)
