@@ -28,4 +28,5 @@ $(vb)activate:
 	$(PY) -m venv $(venv)
 
 clean:
+	rm Pipfile.lock
 	rm --force --recursive $(venv)
