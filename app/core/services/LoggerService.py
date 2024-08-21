@@ -1,5 +1,4 @@
 import sys
-import platform
 import os
 import logging
 import traceback
@@ -11,17 +10,10 @@ class LoggerService:
 		__init__ constructor
 		
 		"""
-		if platform.system() == 'Windows':
-			home_path = os.path.expanduser("~")
-			app_path = home_path + '/AppData/Roaming/ADIAT/'
-			if(not os.path.exists(app_path)):
-				os.makedirs(app_path)
-		elif sys.platform =="darwin":
-			home_path = os.path.expanduser("~")
-			app_path = home_path + '/AppData/Roaming/ADIAT/'
-			if(not os.path.exists(app_path)):
-				os.makedirs(app_path)
-				
+		home_path = os.path.expanduser("~")
+		app_path = home_path + '/AppData/Roaming/ADIAT/'
+		os.makedirs(app_path, exist_ok=True)
+
 		log_path = app_path+'adiat_logs.txt'
 		self.logger = logging.getLogger(__name__)
 		stdoutHandler = logging.StreamHandler(stream=sys.stdout)
