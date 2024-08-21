@@ -10,10 +10,13 @@ define vrun
 	@source $(vb)activate && $(1)
 endef
 
-.PHONY: shell clean
+.PHONY: shell install clean
 
-shell: $(vb)pipenv
-	$(call vrun, bash)
+shell: install
+	$(call vrun, pipenv shell)
+
+install: $(vb)pipenv
+	$(call vrun, pipenv install --dev)
 
 $(vb)pipenv: $(venv)/lib/$(PY)/site-packages/setuptools
 	$(call vrun, pip install pipenv)
