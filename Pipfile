@@ -20,6 +20,7 @@ utm = "*"
 PyExifTool = "*"
 
 [dev-packages]
+flake8 = "7.1.*"
 pyqt-distutils = "*"
 PyInstaller = "*"
 pytest-qt = "*"
