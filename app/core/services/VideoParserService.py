@@ -35,7 +35,7 @@ class VideoParserService(QObject):
 		self.output_dir = output
 		self.interval = interval
 		self.cancelled = False
-	
+
 	@pyqtSlot()
 	def processVideo(self):
 		"""
@@ -59,7 +59,7 @@ class VideoParserService(QObject):
 				self.sig_msg.emit("SRT File Not Provided")
 				self.sig_done.emit(self.__id, 0)
 				return
-			
+
 			srt_list = []
 			if self.srt_path != "":
 				self.sig_msg.emit("Parsing SRT File")
@@ -79,14 +79,14 @@ class VideoParserService(QObject):
 							split = re.split(r"\s*:\s*", uav_entry)
 							uav_dict[split[0]] = split[1]
 
-						srt_list.append({"start": start_time, 
-							"end": end_time, 
-							"latitude": float(uav_dict['latitude']) if "latitude" in uav_dict else None, 
-							"longitude": float(uav_dict['longitude']) if "longitude" in uav_dict else None, 
+						srt_list.append({"start": start_time,
+							"end": end_time,
+							"latitude": float(uav_dict['latitude']) if "latitude" in uav_dict else None,
+							"longitude": float(uav_dict['longitude']) if "longitude" in uav_dict else None,
 							"altitude": float(uav_dict['altitude']) if "altitude" in uav_dict else 0})
 			else:
 				self.sig_msg.emit("SRT File Not Provided")
-			
+
 			self.setupOutputDir();
 			time_marker = 0
 			time = datetime
@@ -95,7 +95,7 @@ class VideoParserService(QObject):
 			base_name = os.path.basename(self.video_path)
 			self.sig_msg.emit("Capturing images")
 			while success and not self.cancelled:
-					
+
 					frame_id = int(fps*time_marker)
 					cap.set(cv2.CAP_PROP_POS_FRAMES, frame_id)
 					time = datetime(1900, 1, 1) + timedelta(seconds = cap.get(cv2.CAP_PROP_POS_MSEC))
@@ -109,15 +109,15 @@ class VideoParserService(QObject):
 						cv2.imwrite(output_file,image)
 						if item is not None:
 							if item["latitude"] is not None and item["longitude"] is not None:
-								MetaDataHelper.addGPSData(output_file, item["latitude"], item["longitude"], item["altitude"])				
+								MetaDataHelper.addGPSData(output_file, item["latitude"], item["longitude"], item["altitude"])
 						image_count += 1
 					time_marker += self.interval
 					if image_count%10 == 0:
 						self.sig_msg.emit("%i images captured" % (image_count))
 			self.sig_done.emit(self.__id, image_count)
 		except Exception as e:
-			self.logger.error(e)		
-				
+			self.logger.error(e)
+
 	@pyqtSlot()
 	def processCancel(self):
 		"""
@@ -125,7 +125,7 @@ class VideoParserService(QObject):
 		"""
 		self.cancelled = True
 		self.sig_msg.emit("--- Cancelling Video Processing ---")
-	
+
 	def setupOutputDir(self):
 		"""
 		setupOutputDir creates the output directory

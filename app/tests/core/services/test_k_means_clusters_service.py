@@ -17,12 +17,12 @@ def test_kmeans_clusters_service_initialization():
 def test_generateClusters(mock_source_image):
     num_clusters = 5
     service = KMeansClustersService(num_clusters)
-    
+
     mock_labels = np.random.randint(0, num_clusters, mock_source_image.shape[:2])
     mock_centers = np.random.randint(0, 256, (num_clusters, 3), dtype=np.uint8)
-    
+
     with patch("cv2.kmeans", return_value=(None, mock_labels, mock_centers)):
         result = service.generateClusters(mock_source_image)
-        
+
         assert result.shape == mock_source_image.shape
         assert result.dtype == np.uint8

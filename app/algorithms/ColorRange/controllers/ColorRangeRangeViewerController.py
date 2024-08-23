@@ -26,7 +26,7 @@ class ColorRangeRangeViewer(QDialog, Ui_ColorRangeViewer):
 		self.populateImage(palettes["unselected"][2],False)
 		self.populateImage(palettes["unselected"][1],False)
 		self.populateImage(palettes["unselected"][0],False)
-			
+
 	def generatePalettes(self, min_rgb, max_rgb):
 		"""
 		generatePalettes generates numpy.ndarrays representing selected and unselected colors
@@ -35,22 +35,22 @@ class ColorRangeRangeViewer(QDialog, Ui_ColorRangeViewer):
 		:Tuple(int, int, int) max_rgb: The maximum color in the selected range
 		:return Dictionary: numpy.ndarrays representing the selected and unselected color ranges 
 		"""
-		
+
 		cv_lower_limit = np.array([min_rgb[2], min_rgb[1], min_rgb[0]], dtype=np.uint8)
 		cv_upper_limit = np.array([max_rgb[2], max_rgb[1], max_rgb[0]], dtype=np.uint8)
-		
+
 		#How big do we want the palettes to be
 		multiplier = 2
 		#180 Hue values
 		x_range = 180*multiplier
 		#256 Light values
 		y_range = 256*multiplier
-		
+
 		#generate the base palettes
 		high = self.generatePalette(x_range, y_range, multiplier, 255)
 		med = self.generatePalette(x_range, y_range, multiplier, 128)
 		low = self.generatePalette(x_range, y_range, multiplier, 64)
-		
+
 		#create the masks representing the selected and unselected colors
 		high_mask = cv2.inRange(high, cv_lower_limit, cv_upper_limit)
 		med_mask = cv2.inRange(med, cv_lower_limit, cv_upper_limit)
@@ -58,7 +58,7 @@ class ColorRangeRangeViewer(QDialog, Ui_ColorRangeViewer):
 		inverse_high_mask = cv2.bitwise_not(high_mask)
 		inverse_med_mask = cv2.bitwise_not(med_mask)
 		inverse_low_mask = cv2.bitwise_not(low_mask)
-		
+
 		#apply the masks to the base palettes
 		selected_high = cv2.bitwise_and(high, high, mask = high_mask)
 		unselected_high = cv2.bitwise_and(high, high, mask = inverse_high_mask)
@@ -86,7 +86,7 @@ class ColorRangeRangeViewer(QDialog, Ui_ColorRangeViewer):
 				l = round(y/multiplier,0)
 				img[x,y] = [h,l,saturation]
 		return cv2.cvtColor(img, cv2.COLOR_HLS2BGR)
-	
+
 	def populateImage(self, img, selected):
 		"""
 		populateImage generates a QtImageViewer and adds it to an existing layout

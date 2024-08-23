@@ -17,7 +17,7 @@ class LocationInfo:
 		is_jpg = imghdr.what(full_path) == 'jpg' or imghdr.what(full_path) == 'jpeg'
 		if not is_jpg:
 			return {}
-		
+
 		exif_dict = piexif.load(full_path)
 		if not exif_dict['GPS'] == {}:
 			latitude = exif_dict['GPS'][piexif.GPSIFD.GPSLatitude]
@@ -39,7 +39,7 @@ class LocationInfo:
 		else:
 			return {}
 		return {'latitude': round(lat_value,6), 'longitude': round(lon_value,6)}
-	
+
 	@staticmethod
 	def convertDegreesToUtm(lat, lng):
 		"""
@@ -48,9 +48,9 @@ class LocationInfo:
 		:float longitude: the decimal latitude position
 		:return Dictionary: EASTING, NORTHING, ZONE_NUMBER, ZONE_LETTER values representing the position in UTM
 		"""
-		utm_pos = utm.from_latlon(lat, lng)	
+		utm_pos = utm.from_latlon(lat, lng)
 		return {'easting': round(utm_pos[0],2), 'northing': round(utm_pos[1],2), 'zone_number': utm_pos[2], 'zone_letter': utm_pos[3]}
-	
+
 	@staticmethod
 	def convertDecimalToDms(lat, lng):
 		"""
@@ -66,7 +66,7 @@ class LocationInfo:
 		degrees = degrees
 		reference = 'N' if is_positive else 'S'
 		latitude = {'degrees': int(degrees), 'minutes': int(minutes), 'seconds': round(seconds,2), 'reference': reference}
-		
+
 		is_positive = lng >= 0
 		lng = abs(lng)
 		minutes,seconds = divmod(lng*3600,60)
@@ -74,9 +74,9 @@ class LocationInfo:
 		degrees = degrees
 		reference = 'E' if is_positive else 'W'
 		longitude = {'degrees': int(degrees), 'minutes': int(minutes), 'seconds': round(seconds,2), 'reference': reference}
-		
+
 		return{'latitude':latitude, 'longitude':longitude}
-	
+
 	@staticmethod
 	def __convert_to_degrees(value):
 		"""

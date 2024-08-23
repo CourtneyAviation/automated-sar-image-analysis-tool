@@ -35,20 +35,20 @@ class ColorRangeService(AlgorithmService):
 			#get the color range boundries
 			cv_lower_limit = np.array([self.min_rgb[2], self.min_rgb[1], self.min_rgb[0]], dtype=np.uint8)
 			cv_upper_limit = np.array([self.max_rgb[2], self.max_rgb[1], self.max_rgb[0]], dtype=np.uint8)
-			
+
 			#find the pixels that are in our color range (https://docs.opencv.org/3.4.3/da/d97/tutorial_threshold_inRange.html)
 			mask = cv2.inRange(img, cv_lower_limit, cv_upper_limit)
 
 			#keep the pixels we just identified
 			#res = cv2.bitwise_and(img,img, mask= mask)
-			
+
 			#make a list of the identified areas.
 			contours, hierarchy = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 			augmented_image, areas_of_interest, base_contour_count =  self.circleAreasOfInterest(img, contours)
 			output_path= full_path.replace(input_dir, output_dir)
 			if augmented_image is not None:
-				self.storeImage(full_path, output_path, augmented_image)   
+				self.storeImage(full_path, output_path, augmented_image)
 			return AnalysisResult(full_path, output_path, areas_of_interest, base_contour_count)
-   
+
 		except Exception as e:
 			return AnalysisResult(full_path, error_message = str(e))

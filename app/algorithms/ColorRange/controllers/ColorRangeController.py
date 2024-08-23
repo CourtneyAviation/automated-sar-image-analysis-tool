@@ -44,7 +44,7 @@ class ColorRangeController(QWidget, Ui_ColorRange, AlgorithmController):
 				self.updateColors();
 		except Exception as e:
 			self.logger.error(e)
-			
+
 	def viewRangeButtonClicked(self):
 		"""
 		viewRangeButtonClicked click handler for the view range button
@@ -52,7 +52,7 @@ class ColorRangeController(QWidget, Ui_ColorRange, AlgorithmController):
 		"""
 		rangeDialog = ColorRangeRangeViewer(self.lowerColor, self.upperColor)
 		rangeDialog.exec()
-		
+
 	def updateColors(self):
 		"""
 		updateColors gets the min and max rgb colors relative to the base color and updates the colors of the color range boxes

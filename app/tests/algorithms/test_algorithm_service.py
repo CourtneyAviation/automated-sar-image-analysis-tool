@@ -37,18 +37,18 @@ def test_store_image(mock_image_open, mock_open, mock_path_parents, mock_transfe
     mock_temperature_data = None
 
     algorithm_service.storeImage(mock_input_file, mock_output_file, mock_augmented_image, mock_temperature_data)
-    
+
     mock_exists.assert_called_once_with(Path(mock_output_file).parents[0])
     mock_makedirs.assert_called_once_with(Path(mock_output_file).parents[0])
 
 def test_circle_areas_of_interest(algorithm_service):
     img = np.zeros((100, 100, 3), dtype=np.uint8)
     contours = [np.array([[10, 10], [10, 20], [20, 20], [20, 10]], dtype=np.int32)]
-    
+
     with patch('cv2.circle', return_value=img) as mock_circle, \
          patch('cv2.findContours', return_value=(contours, None)):
         result_img, areas_of_interest, base_contour_count = algorithm_service.circleAreasOfInterest(img, contours)
-        
+
         assert result_img is not None
         assert len(areas_of_interest) > 0
         assert base_contour_count == len(contours)
@@ -57,9 +57,9 @@ def test_circle_areas_of_interest(algorithm_service):
 def test_circle_areas_of_interest_no_contours(algorithm_service):
     img = np.zeros((100, 100, 3), dtype=np.uint8)
     contours = []
-    
+
     result_img, areas_of_interest, base_contour_count = algorithm_service.circleAreasOfInterest(img, contours)
-    
+
     assert result_img is None
     assert areas_of_interest is None
     assert base_contour_count is None

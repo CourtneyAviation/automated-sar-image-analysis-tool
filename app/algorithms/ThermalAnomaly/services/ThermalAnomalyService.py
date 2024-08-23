@@ -40,14 +40,14 @@ class ThermalAnomalyService(AlgorithmService):
 		"""
 		try:
 			#copy the image so we can compare back to the orginal
-			#calculate the match filter scores 
+			#calculate the match filter scores
 			thermal = ThermalParserService(dtype=np.float32)
 			temperature_c, thermal_img = thermal.parseFile(full_path, self.color_map )
 			mean = np.mean(temperature_c)
 			standard_deviation = np.std(temperature_c);
 			max_threshold = mean + (standard_deviation * self.threshold)
 			min_threshold = mean - (standard_deviation * self.threshold)
-			
+
 			if self.direction == 'Above or Below Mean':
 				mask =  np.uint8(1 * ((temperature_c > max_threshold ) + (temperature_c < min_threshold)))
 			elif self.direction == 'Above Mean':
@@ -55,11 +55,11 @@ class ThermalAnomalyService(AlgorithmService):
 			else:
 				mask =  np.uint8(1 * (temperature_c < min_threshold))
 			#make a list of the identified areas.
-			contours, hierarchy = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)	
+			contours, hierarchy = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 			augmented_image, areas_of_interest, base_contour_count =  self.circleAreasOfInterest(thermal_img, contours)
 			output_path= full_path.replace(input_dir, output_dir)
 			if augmented_image is not None:
-				self.storeImage(full_path, output_path, augmented_image, temperature_c)   
+				self.storeImage(full_path, output_path, augmented_image, temperature_c)
 			return AnalysisResult(full_path, output_path, areas_of_interest, base_contour_count)
 		except Exception as e:
 			return AnalysisResult(full_path, error_message = str(e))

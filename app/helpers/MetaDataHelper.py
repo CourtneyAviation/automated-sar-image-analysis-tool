@@ -7,7 +7,7 @@ import numpy as np
 import platform
 class MetaDataHelper:
 
-	@staticmethod	
+	@staticmethod
 	def getEXIFToolPath():
 		if platform.system() == 'Windows':
 			return path.abspath(path.join(path.dirname(path.dirname(__file__)), 'external/exiftool.exe'))
@@ -27,7 +27,7 @@ class MetaDataHelper:
 			MetaDataHelper.transferExifPil(originFile, destinationFile)
 		except  ValueError as ve:
 			return
-		
+
 	@staticmethod
 	def transferExifPil(originFile, destinationFile):
 		"""
@@ -44,7 +44,7 @@ class MetaDataHelper:
 		# load new image
 		image_new = Image.open(destinationFile)
 		image_new.save(destinationFile, 'JPEG', exif=exif)
-	
+
 	@staticmethod
 	def transferExifExiftool(originFile, destinationFile):
 		"""
@@ -56,8 +56,8 @@ class MetaDataHelper:
 		with exiftool.ExifTool(MetaDataHelper.getEXIFToolPath()) as et:
 			et.execute("-tagsfromfile", originFile, "-exif", destinationFile, "-overwrite_original")
 			et.terminate()
-	
-	@staticmethod      
+
+	@staticmethod
 	def transferXmpExiftool(originFile, destinationFile):
 		"""
 		transferXmpExiftool copies the xmp information of an image file to another image file using Exiftool
@@ -68,7 +68,7 @@ class MetaDataHelper:
 		with exiftool.ExifTool(MetaDataHelper.getEXIFToolPath()) as et:
 			et.execute("-tagsfromfile", originFile, "-xmp", destinationFile, "-overwrite_original")
 			et.terminate()
-			
+
 	def transferAll(originFile, destinationFile):
 		"""
 		transferAll copies the exif and xmp information of an image file to another image file using Exiftool
@@ -79,8 +79,8 @@ class MetaDataHelper:
 		with exiftool.ExifTool(MetaDataHelper.getEXIFToolPath()) as et:
 			et.execute("-tagsfromfile", originFile,  destinationFile, "-overwrite_original", "--thumbnailimage")
 			et.terminate()
-	
-	@staticmethod     	
+
+	@staticmethod
 	def transferTemperatureData(data, destinationFile):
 		"""
 		transferTemperatureData copies the temperature data from the original image to the Note field on the augmented image.
@@ -96,7 +96,7 @@ class MetaDataHelper:
 				params=["-P", "-overwrite_original"]
 			)
 			et.terminate()
-			  
+
 	@staticmethod
 	def getRawTemperatureData(file_path):
 		"""
@@ -105,10 +105,10 @@ class MetaDataHelper:
 		:return str: the bytes representing the temperature values
 		"""
 		with exiftool.ExifTool(MetaDataHelper.getEXIFToolPath()) as et:
-			thermal_img_bytes = et.execute("-b", "-RawThermalImage", file_path, raw_bytes=True)	
+			thermal_img_bytes = et.execute("-b", "-RawThermalImage", file_path, raw_bytes=True)
 			et.terminate()
 		return thermal_img_bytes
-	@staticmethod     
+	@staticmethod
 	def getTemperatureData(file_path):
 		"""
 		getTemperatureData returns a numpy array of temeprature data from the notes field an image.
@@ -132,7 +132,7 @@ class MetaDataHelper:
 			metadata = et.get_metadata([file_path])[0]
 			et.terminate()
 		return metadata
-		
+
 	@staticmethod
 	def setTags(file_path, tags):
 		"""
@@ -144,7 +144,7 @@ class MetaDataHelper:
 			et.set_tags([file_path],tags=tags, params=["-overwrite_original"])
 			et.terminate()
 
-	@staticmethod    
+	@staticmethod
 	def addGPSData(file_path, lat, lng, alt):
 		# Load the image and its EXIF data
 		img = Image.open(file_path)

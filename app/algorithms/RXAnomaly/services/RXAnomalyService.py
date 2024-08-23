@@ -44,7 +44,7 @@ class RXAnomalyService(AlgorithmService):
 			for x in range(0, len(pieces)):
 				for y in range(0, len(pieces[x])):
 					rx_values = spectral.rx(pieces[x][y])
-					chi_values = chi2.ppf(self.chi_threshold, pieces[x][y].shape[-1])    
+					chi_values = chi2.ppf(self.chi_threshold, pieces[x][y].shape[-1])
 					masks[x][y] =  np.uint8((1 * (rx_values > chi_values)))
 			combined_mask = self.glueImage(masks)
 			"""
@@ -62,11 +62,11 @@ class RXAnomalyService(AlgorithmService):
 			augmented_image, areas_of_interest, base_contour_count =  self.circleAreasOfInterest(img, contours)
 			output_path= full_path.replace(input_dir, output_dir)
 			if augmented_image is not None:
-				self.storeImage(full_path, output_path, augmented_image)    
+				self.storeImage(full_path, output_path, augmented_image)
 			return AnalysisResult(full_path, output_path, areas_of_interest, base_contour_count)
 		except Exception as e:
 			return AnalysisResult(full_path, error_message = str(e))
-			
+
 	def getThreshold(self, sensitivity):
 		"""
 		getThreshold get the chi2 threshold based on a sensitivity value
@@ -75,7 +75,7 @@ class RXAnomalyService(AlgorithmService):
 		:return float
 		"""
 		return 1 - float("."+("1".zfill(sensitivity+5)))
-	
+
 	def splitImage(self, img, segments):
 		"""
 		splitImage divides a single image into mupliple segments.
@@ -86,7 +86,7 @@ class RXAnomalyService(AlgorithmService):
 		"""
 		h, w, channels = img.shape
 		pieces = []
-		if(segments == 2):    
+		if(segments == 2):
 			w_size = math.ceil(w/2)
 			pieces.append([])
 			pieces [0].append(img[:, :w_size])
@@ -140,7 +140,7 @@ class RXAnomalyService(AlgorithmService):
 			pieces [1].append(img[h_size:h_size*2, :w_size])
 			pieces [1].append(img[h_size:h_size*2, w_size:w_size*2])
 			pieces [1].append(img[h_size:h_size*2, w_size*2:w_size*3])
-			pieces [1].append(img[h_size:h_size*2, w_size*3:])   
+			pieces [1].append(img[h_size:h_size*2, w_size*3:])
 			pieces [2].append(img[h_size*2:h_size*3, :w_size])
 			pieces [2].append(img[h_size*2:h_size*3, w_size:w_size*2])
 			pieces [2].append(img[h_size*2:h_size*3, w_size*2:w_size*3])
@@ -230,7 +230,7 @@ class RXAnomalyService(AlgorithmService):
 		else:
 			pieces.append([])
 			pieces[0].append(img)
-		return pieces        
+		return pieces
 
 	def glueImage(self, pieces):
 		"""
@@ -242,6 +242,4 @@ class RXAnomalyService(AlgorithmService):
 		rows = []
 		for x in range(0, len(pieces)):
 			rows.append(cv2.hconcat(pieces[x]))
-		return cv2.vconcat(rows); 
-		
-		
+		return cv2.vconcat(rows);

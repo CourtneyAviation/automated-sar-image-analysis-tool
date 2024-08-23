@@ -7,7 +7,7 @@ class SettingsService:
 		__init__ constructor for the settings service
 		"""
 		self.settings = QtCore.QSettings('ADIAT')
-		
+
 	def setSetting(self, name, value):
 		"""
 		setSetting sets a given setting in QSettings
@@ -16,7 +16,7 @@ class SettingsService:
 		:String value: the value of the setting
 		"""
 		self.settings.setValue(name, value)
-	
+
 	def getSetting(self,name):
 		"""
 		getSetting retrieves a given setting from QSettings

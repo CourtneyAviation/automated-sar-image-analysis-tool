@@ -134,7 +134,7 @@ class QtImageViewer(QGraphicsView):
         # Flags for active zooming/panning.
         self._isZooming = False
         self._isPanning = False
-        
+
         self.canZoom = True
         self.canPan = True
 
@@ -154,11 +154,11 @@ class QtImageViewer(QGraphicsView):
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         self.center=center
         self.thumbnail = thumbnail
-        
+
 
     def keyPressEvent(self, e):
         self.window.keyPressEvent(e)
-        
+
     def hasImage(self):
         """ Returns whether the scene contains an image pixmap.
         """
@@ -422,7 +422,7 @@ class QtImageViewer(QGraphicsView):
 
     def wheelEvent(self, event):
         if self.thumbnail == True:
-            return    
+            return
         if self.wheelZoomFactor is not None:
             if self.wheelZoomFactor == 1:
                 return
@@ -480,14 +480,14 @@ class QtImageViewer(QGraphicsView):
             #pos = QPoint(center[0],center[1])
             #self.centerOn(pos)
             #self.scale(scale, scale)
-            
+
     def resetZoom(self):
         self.clearZoom()
         self.fitInView(self.sceneRect(), self.aspectRatioMode)
-        
+
     def showEvent(self, event):
         self.resetZoom()
-        
+
     def mouseMoveEvent(self, event):
         # Emit updated view during panning.
         if self._isPanning:

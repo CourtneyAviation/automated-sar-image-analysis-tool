@@ -33,7 +33,7 @@ class ThermalRangeController(QWidget, Ui_ThermalRange, AlgorithmController):
 		else:
 			options['minTemp'] = int(self.minTempSpinBox.value())
 			options['maxTemp'] = int(self.maxTempSpinBox.value())
-			
+
 		options['colorMap'] = self.colorMapComboBox.currentText()
 		return options
 
@@ -43,14 +43,14 @@ class ThermalRangeController(QWidget, Ui_ThermalRange, AlgorithmController):
 		"""
 		if self.minTempSpinBox.value() > self.maxTempSpinBox.value():
 			self.maxTempSpinBox.setValue(self.minTempSpinBox.value())
-	
+
 	def updateMaxTemp(self):
 		"""
 		updateMaxTemp change handler for the maxTemp slider
 		"""
 		if self.minTempSpinBox.value() > self.maxTempSpinBox.value():
 			self.minTempSpinBox.setValue(self.maxTempSpinBox.value())
-			
+
 	def validate(self):
 		"""
 		validate validates that the required values have been provided
@@ -74,18 +74,18 @@ class ThermalRangeController(QWidget, Ui_ThermalRange, AlgorithmController):
 			if 'minTemp' in options:
 				self.minTempSpinBox.setValue(int(float(options['minTemp'])))
 			if 'maxTemp' in options:
-				self.maxTempSpinBox.setValue(int(float(options['maxTemp'])))				
+				self.maxTempSpinBox.setValue(int(float(options['maxTemp'])))
 		self.colorMapComboBox.setCurrentText(options['colorMap'])
-			
+
 	def convertTemperatureRanges(self):
 		"""
 		convertTemperatureRanges modifies the temperate range controls to accept Fahrenheit instead of Celsius
 		"""
-		self.minTempLabel.setText('Minimum Temp ('+u'\N{DEGREE SIGN}'+' F)') 
+		self.minTempLabel.setText('Minimum Temp ('+u'\N{DEGREE SIGN}'+' F)')
 		self.minTempSpinBox.setMinimum(-20)
 		self.minTempSpinBox.setMaximum(120)
 		self.minTempSpinBox.setValue(95)
-		self.maxTempLabel.setText('Maximum Temp ('+u'\N{DEGREE SIGN}'+' F)') 
+		self.maxTempLabel.setText('Maximum Temp ('+u'\N{DEGREE SIGN}'+' F)')
 		self.maxTempSpinBox.setMinimum(-20)
 		self.maxTempSpinBox.setMaximum(200)
 		self.maxTempSpinBox.setValue(105)
@@ -98,7 +98,7 @@ class ThermalRangeController(QWidget, Ui_ThermalRange, AlgorithmController):
 		:return float: the converted value
 		"""
 		return (value - 32)/1.8000
-	
+
 	def convertCelsiusToFahrenheit(self, value):
 		"""
 		convertCelsiusToFahrenheit converts a Celsius value to Fahrenheit

@@ -31,7 +31,7 @@ class RXAnomalyController(QWidget, Ui_RXAnomaly, AlgorithmController):
 		updateSensitivity click handler for the sensitivity slider
 		"""
 		self.sensitivityValueLabel.setText(str(self.sensitivitySlider.value()))
-	
+
 	def validate(self):
 		"""
 		validate validates that the required values have been provided

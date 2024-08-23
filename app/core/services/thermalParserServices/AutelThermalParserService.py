@@ -61,7 +61,7 @@ class AutelThermalImageParser:
 		if ret == 0:
 			temp = np.reshape(data, (image_height, image_width))
 		return temp
-	
+
 	def image(self, temperatures: np.ndarray, palette:int):
 		"""
 		 Generates a numpy array representing the thermal image for FLIR cameras
@@ -79,7 +79,7 @@ class AutelThermalImageParser:
 		else:
 			colorized_img = cv2.applyColorMap(grey, color_map)
 		return colorized_img
-	
+
 	def getColorMap(self, palette:str):
 		"""
 		Takes in a generic name for the palette and returns the platform-specific variation
@@ -90,7 +90,7 @@ class AutelThermalImageParser:
 		"""
 		match palette:
 			case "Inferno (Iron Red)":
-				return cv2.COLORMAP_INFERNO 
+				return cv2.COLORMAP_INFERNO
 			case "White Hot":
 				return 1
 			case "Black Hot":
@@ -101,6 +101,6 @@ class AutelThermalImageParser:
 				return 7
 			case _:
 				return 1
-			
+
 	def get_default_filepaths(self):
 		return os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))), 'external/autel/AutelBridge.dll')

@@ -28,7 +28,7 @@ class Viewer(QMainWindow, Ui_Viewer):
 		QMainWindow.__init__(self)
 		self.logger = LoggerService()
 		self.setupUi(self)
-		
+
 		self.images = images
 		self.position_format = position_format
 		self.position = None
@@ -46,7 +46,7 @@ class Viewer(QMainWindow, Ui_Viewer):
 				self.images.remove(image)
 			elif imghdr.what(image['path']) is None:
 				self.images.remove(image)
-		
+
 		if len(self.images) == 0:
 			self.mainImage = None
 			self.showError("No images available.")
@@ -58,14 +58,14 @@ class Viewer(QMainWindow, Ui_Viewer):
 			self.KmlButton.clicked.connect(self.KmlButtonClicked)
 			self.jumpToLine.setValidator(QIntValidator(1, len(self.images), self))
 			self.jumpToLine.editingFinished.connect(self.jumpToLineChanged)
-	
+
 	def keyPressEvent(self, e):
 		if e.key() == Qt.Key_Right:
 			self.nextImageButtonClicked()
 		if e.key() == Qt.Key_Left:
 			self.previousImageButtonClicked()
-			
-		
+
+
 	def loadInitialImage(self):
 		"""
 		loadInitialImage loads the image and areas of interest at index 0 from the images list
@@ -86,7 +86,7 @@ class Viewer(QMainWindow, Ui_Viewer):
 			img = QImage(image['path'])
 			self.mainImage.setImage(img)
 			self.ImageLayout.replaceWidget(self.placeholderImage, self.mainImage)
-			
+
 			self.fileNameLabel.setText(image['name'])
 			#create the areas of interest thumbnails
 			self.loadAreasofInterest(image)
@@ -103,10 +103,10 @@ class Viewer(QMainWindow, Ui_Viewer):
 			if self.is_thermal:
 				self.temperature_data = self.loadThermalData(image['path'])
 			self.mainImage.mousePositionOnImageChanged.connect(self.mainImageMousePos)
-				
+
 		except Exception as e:
 			self.logger.error(e)
-			
+
 	def mainImageMousePos(self, pos):
 		if self.temperature_data is not None:
 			shape = self.temperature_data.shape
@@ -123,7 +123,7 @@ class Viewer(QMainWindow, Ui_Viewer):
 		"""
 		try:
 			image = self.images[self.current_image]
-		
+
 			#load and set the image
 			img = QImage(image['path'])
 			self.mainImage.setImage(img)
@@ -140,7 +140,7 @@ class Viewer(QMainWindow, Ui_Viewer):
 				#self.statusbar.showMessage("GPS Coordinates: "+gps_coords['latitude']+", "+gps_coords['longitude'])
 				self.statusbar.showMessage("GPS Coordinates: " + self.position)
 			else:
-				self.statusbar.showMessage("")	
+				self.statusbar.showMessage("")
 			self.indexLabel.setText("Image "+str(self.current_image + 1)+" of "+str(len(self.images)))
 			if self.is_thermal:
 				self.temperature_data = self.loadThermalData(image['path'])
@@ -155,7 +155,7 @@ class Viewer(QMainWindow, Ui_Viewer):
 		"""
 		#remove any thumbnails already in the list
 		self.aoiListWidget.clear()
-		
+
 		#convert the image to an array
 		img_arr = qimage2ndarray.imread(image['path'])
 		img_width = img_arr.shape[1] - 1
@@ -181,7 +181,7 @@ class Viewer(QMainWindow, Ui_Viewer):
 
 			#add the image widget to a list of widgets.
 			listItem = QListWidgetItem()
-			listItem.setSizeHint(QSize(190, 190))    
+			listItem.setSizeHint(QSize(190, 190))
 			self.aoiListWidget.addItem(listItem)
 			self.aoiListWidget.setItemWidget(listItem, highlight)
 			self.highlights.append(highlight)
@@ -198,7 +198,7 @@ class Viewer(QMainWindow, Ui_Viewer):
 			return (data * 1.8000)+32
 		else:
 			return data
-			
+
 	def previousImageButtonClicked(self):
 		"""
 		previousImageButtonClicked click handler to navigate to the previous image in the images list
@@ -218,7 +218,7 @@ class Viewer(QMainWindow, Ui_Viewer):
 		else:
 			self.current_image += 1
 		self.loadImage()
-	
+
 	def jumpToLineChanged(self):
 		"""
 		jumpToLineChanged change handler to jump to a particular image
@@ -227,7 +227,7 @@ class Viewer(QMainWindow, Ui_Viewer):
 			self.current_image = int(self.jumpToLine.text())-1
 			self.loadImage()
 			self.jumpToLine.setText("")
-		
+
 	def resizeEvent(self, event):
 		"""
 		resizeEvent event triggered by window resize that will resize that main image
@@ -246,7 +246,7 @@ class Viewer(QMainWindow, Ui_Viewer):
 		:QtImageViewer img: the thumbnail image
 		"""
 		self.mainImage.zoomToArea(img.center,6)
-		
+
 	def KmlButtonClicked(self):
 		"""
 		KmlButtonClicked click handler for the genereate KML button
@@ -254,7 +254,7 @@ class Viewer(QMainWindow, Ui_Viewer):
 		"""
 		fileName, _ = QFileDialog.getSaveFileName(self, "Save KML File", "", "KML files (*.kml)")
 		self.generateKml(fileName)
-		
+
 	def generateKml(self, output_path):
 		"""
 		generateKml produces the KML file and saves it to the output_path
@@ -274,7 +274,7 @@ class Viewer(QMainWindow, Ui_Viewer):
 				kml_points.append(point)
 		kml.addPoints(kml_points)
 		kml.saveKml(output_path)
-			
+
 	def crop_image(self,img_arr,startx,starty, endx, endy):
 		"""
 		crop_image produces an array representing a portion of a larger input array
@@ -300,9 +300,9 @@ class Viewer(QMainWindow, Ui_Viewer):
 			ex = img_width
 		ey = endy
 		if ey > img_height:
-			ey = img_height	
+			ey = img_height
 		return img_arr[sy:ey,sx:ex]
-	
+
 	def showError(self, text):
 		"""
 		showError open a message box showing an error with the provided text
@@ -315,7 +315,7 @@ class Viewer(QMainWindow, Ui_Viewer):
 		msg.setWindowTitle("Error Loading Images")
 		msg.setStandardButtons(QMessageBox.Ok)
 		msg.exec_()
-	
+
 	def getPosition(self, latitude, longitude):
 		"""
 		getLocation takes in the latitude and longitude in degree, minute, second format and returns the position as a string in the selected coordinate format

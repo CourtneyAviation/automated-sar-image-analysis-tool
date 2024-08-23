@@ -27,7 +27,7 @@ class ThermalAnomalyController(QWidget, Ui_ThermalAnomaly, AlgorithmController):
 		options['type'] = self.anomalyTypeComboBox.currentText()
 		options['colorMap'] = self.colorMapComboBox.currentText()
 		return options
-			
+
 	def validate(self):
 		"""
 		validate validates that the required values have been provided

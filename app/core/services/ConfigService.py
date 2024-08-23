@@ -13,6 +13,6 @@ class ConfigService:
 		"""
         with open(path) as f:
             self.config = json.load(f)
-            
+
     def getAlgorithms(self):
         return self.config['algorithms']

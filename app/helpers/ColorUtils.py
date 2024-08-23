@@ -33,5 +33,5 @@ class ColorUtils:
         if lower_g < 0:
             lower_g = 0
         if lower_b < 0:
-            lower_b = 0 
+            lower_b = 0
         return  (lower_r,lower_g,lower_b), (upper_r,upper_g,upper_b)

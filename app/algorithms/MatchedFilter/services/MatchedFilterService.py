@@ -33,16 +33,16 @@ class MatchedFilterService(AlgorithmService):
 		"""
 		try:
 			#copy the image so we can compare back to the orginal
-			#calculate the match filter scores 
+			#calculate the match filter scores
 			scores = spectral.matched_filter(img, np.array([self.match_color[2], self.match_color[1], self.match_color[0]], dtype=np.uint8))
 			mask =  np.uint8((1 * (scores > self.threshold)))
 
 			#make a list of the identified areas.
-			contours, hierarchy = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)	
+			contours, hierarchy = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 			augmented_image, areas_of_interest, base_contour_count =  self.circleAreasOfInterest(img, contours)
 			output_path= full_path.replace(input_dir, output_dir)
 			if augmented_image is not None:
-				self.storeImage(full_path, output_path, augmented_image)   
+				self.storeImage(full_path, output_path, augmented_image)
 			return AnalysisResult(full_path, output_path, areas_of_interest, base_contour_count)
 		except Exception as e:
 			return AnalysisResult(full_path, error_message = str(e))

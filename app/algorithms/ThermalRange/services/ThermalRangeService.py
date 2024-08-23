@@ -36,18 +36,18 @@ class ThermalRangeService(AlgorithmService):
 		"""
 		try:
 			#copy the image so we can compare back to the orginal
-			#calculate the match filter scores 
+			#calculate the match filter scores
 			#thermal = Thermal(dtype=np.float32)
 			#temperature_c, thermal_img = thermal.parse(full_path, self.color_map )
 			thermal = ThermalParserService(dtype=np.float32)
 			temperature_c, thermal_img = thermal.parseFile(full_path, self.color_map )
 			mask =  np.uint8(1 * ((temperature_c > self.min_temp ) & (temperature_c < self.max_temp)))
 			#make a list of the identified areas.
-			contours, hierarchy = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)	
+			contours, hierarchy = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 			augmented_image, areas_of_interest, base_contour_count =  self.circleAreasOfInterest(thermal_img, contours)
 			output_path= full_path.replace(input_dir, output_dir)
 			if augmented_image is not None:
-				self.storeImage(full_path, output_path, augmented_image, temperature_c)   
+				self.storeImage(full_path, output_path, augmented_image, temperature_c)
 			return AnalysisResult(full_path, output_path, areas_of_interest, base_contour_count)
 		except Exception as e:
 			return AnalysisResult(full_path, error_message = str(e))

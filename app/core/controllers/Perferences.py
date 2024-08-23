@@ -23,7 +23,7 @@ class Preferences(QDialog, Ui_Preferences):
 		self.themeComboBox.currentTextChanged.connect(self.updateTheme)
 		self.positionFormatComboBox.currentTextChanged.connect(self.updatePositionFormat)
 		self.temperatureComboBox.currentTextChanged.connect(self.updateTemperatureUnit)
-	
+
 	def updateMaxAOIs(self):
 		"""
 		updateMaxAOIs action method triggered on changes to the max areas of interest spinbox
@@ -34,20 +34,20 @@ class Preferences(QDialog, Ui_Preferences):
 		updateAOIRadius action method triggered on changes to the areas of interest radius spinbox
 		"""
 		self.parent.settings_service.setSetting('AOIRadius', self.AOIRadiusSpinBox.value())
-		
+
 	def updateTheme(self):
 		"""
 		updateTheme action method triggered on changes to theme combobox
 		"""
 		self.parent.settings_service.setSetting('Theme', self.themeComboBox.currentText())
 		self.parent.updateTheme(self.themeComboBox.currentText())
-		
+
 	def updatePositionFormat(self):
 		"""
 		updatePositionFormat action method triggered on changes to position format combobox
 		"""
 		self.parent.settings_service.setSetting('PositionFormat', self.positionFormatComboBox.currentText())
-		
+
 	def updateTemperatureUnit(self):
 		"""
 		updateTemperatureUnit action method triggered on changes to temperature unit combobox

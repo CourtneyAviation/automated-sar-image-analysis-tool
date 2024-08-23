@@ -66,9 +66,9 @@ class AnalyzeService(QObject):
 		self.images_with_aois = []
 		self.cancelled = False
 		self.is_thermal = thermal
-	
+
 		self.pool = Pool(self.num_processes)
-	
+
 	@pyqtSlot()
 	def processFiles(self):
 		"""
@@ -78,7 +78,7 @@ class AnalyzeService(QObject):
 			self.setupOutputDir()
 			self.setupOutputXml()
 			image_files = []
-			
+
 			start_time = time.time()
 			for subdir, dirs, files in os.walk(self.input):
 				for file in files:
@@ -105,7 +105,7 @@ class AnalyzeService(QObject):
 					self.sig_msg.emit("Skipping "+file+ " :: File is not an image")
 			self.pool.close()
 			self.pool.join()
-			#generate the output xml with the information gathered during processing			
+			#generate the output xml with the information gathered during processing
 			self.images_with_aois = sorted(self.images_with_aois, key=operator.itemgetter('path'))
 			for img in self.images_with_aois:
 				self.addImageToXml(img)
@@ -116,7 +116,7 @@ class AnalyzeService(QObject):
 			self.sig_msg.emit("Total Images Proccessed: "+str(ttl_images))
 		except Exception as e:
 			self.logger.error(e)
-			
+
 	@staticmethod
 	def processFile(algorithm, identifier_color, min_area, aoi_radius, options, full_path, input_dir, output_dir, hist_ref_path, kmeans_clusters, thermal):
 		"""
@@ -141,25 +141,25 @@ class AnalyzeService(QObject):
 			if hist_ref_path is not None:
 				histogram_service = HistogramNormalizationService(hist_ref_path)
 				img = histogram_service.matchHistograms(img)
-				
-			#if the kmeans clusters number is not empty, create an instance of the KMeansClustersService			
+
+			#if the kmeans clusters number is not empty, create an instance of the KMeansClustersService
 			kmeans_service = None
 			if kmeans_clusters is not None:
 				kmeans_service = KMeansClustersService(kmeans_clusters)
 				img = kmeans_service.generateClusters(img)
-				
+
 		#Create an instance of the algorithm class
 		cls = globals()[algorithm['service']]
 		instance = cls(identifier_color, min_area, aoi_radius, algorithm['combine_overlapping_aois'], options)
-			
+
 		try:
 			#process the image using the algorithm
 			return instance.processImage(img, full_path, input_dir, output_dir)
 		except Exception as e:
 			logger = LoggerService()
 			logger.error(e)
-	
-	@pyqtSlot()			
+
+	@pyqtSlot()
 	def processComplete(self, result):
 		"""
 		processComplete processes the analyzed image
@@ -181,7 +181,7 @@ class AnalyzeService(QObject):
 				self.max_aois_limit_exceeded = True
 		else:
 			self.sig_msg.emit('No areas of interested identified in '+file_name)
-				
+
 	@pyqtSlot()
 	def processCancel(self):
 		"""
@@ -190,7 +190,7 @@ class AnalyzeService(QObject):
 		self.cancelled = True
 		self.sig_msg.emit("--- Cancelling Image Processing ---")
 		self.pool.terminate()
-			
+
 	def setupOutputDir(self):
 		"""
 		setupOutputDir creates the output directory

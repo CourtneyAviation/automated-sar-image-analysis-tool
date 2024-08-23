@@ -25,7 +25,7 @@ CHUNK_METADATA_LENGTH = (
 		CHUNK_PARTIAL_METADATA_LENGTH + CHUNK_SKIP_BYTES_COUNT + CHUNK_NUM_BYTES_COUNT + CHUNK_TOT_BYTES_COUNT
 )
 
-class FlirThermalParserService:	
+class FlirThermalParserService:
 	def __init__(
 			self,
 			dtype=np.float32,
@@ -163,7 +163,7 @@ class FlirThermalParserService:
 		# temperature from radiance
 		temperature = planck_b / np.log(val_to_log) - ABSOLUTE_ZERO
 		return np.array(temperature, self._dtype)
-	
+
 	def image(self, temperatures: np.ndarray, palette:int):
 		"""
 		 Generates a numpy array representing the thermal image for FLIR cameras
@@ -181,7 +181,7 @@ class FlirThermalParserService:
 		else:
 			colorized_img = cv2.applyColorMap(grey, color_map)
 		return colorized_img
-	
+
 	def getColorMap(self, palette:str):
 		"""
 		Takes in a generic name for the palette and returns the platform-specific variation
@@ -192,7 +192,7 @@ class FlirThermalParserService:
 		"""
 		match palette:
 			case "Inferno (Iron Red)":
-				return cv2.COLORMAP_INFERNO 
+				return cv2.COLORMAP_INFERNO
 			case "White Hot":
 				return 1
 			case "Black Hot":
@@ -203,7 +203,7 @@ class FlirThermalParserService:
 				return 7
 			case _:
 				return 1
-			
+
 	def unpack(self, path_or_stream: Union[str, BinaryIO]) -> np.ndarray:
 		"""Unpacks the FLIR image, meaning that it will return the thermal data embedded in the image.
 

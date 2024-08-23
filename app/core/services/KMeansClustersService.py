@@ -12,7 +12,7 @@ class KMeansClustersService:
 		"""
 		self.logger = LoggerService()
 		self.num_clusters = clusters
-		
+
 	def generateClusters(self,src):
 		"""
 		generateClusters processes an image and returns one with the defined number of clusters(colors)

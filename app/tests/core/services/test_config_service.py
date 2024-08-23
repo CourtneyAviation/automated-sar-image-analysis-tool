@@ -10,9 +10,9 @@ def test_config_service_initialization():
             {"name": "Algorithm2", "params": {"param1": "value2"}}
         ]
     }
-    
+
     mock_path = "/path/to/config.json"
-    
+
     with patch("builtins.open", mock_open(read_data=json.dumps(mock_config_data))):
         config_service = ConfigService(mock_path)
         assert config_service.config == mock_config_data
@@ -24,9 +24,9 @@ def test_getAlgorithms():
             {"name": "Algorithm2", "params": {"param1": "value2"}}
         ]
     }
-    
+
     mock_path = "/path/to/config.json"
-    
+
     with patch("builtins.open", mock_open(read_data=json.dumps(mock_config_data))):
         config_service = ConfigService(mock_path)
         algorithms = config_service.getAlgorithms()
@@ -34,4 +34,3 @@ def test_getAlgorithms():
         assert len(algorithms) == 2
         assert algorithms[0]["name"] == "Algorithm1"
         assert algorithms[1]["name"] == "Algorithm2"
-

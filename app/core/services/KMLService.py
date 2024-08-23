@@ -7,7 +7,7 @@ class KMLService:
 		__init__ constructor for the service
 		"""
 		self.kml = simplekml.Kml()
-		
+
 	def addPoints(self, points):
 		"""
 		addPoints adds a list of points to the KML document
@@ -16,7 +16,7 @@ class KMLService:
 		"""
 		for point in points:
 			self.kml.newpoint(name=point["name"], coords = [(point["long"],point["lat"])])
-			
+
 	def saveKml(self, path):
 		"""
 		saveKml saves the KML file

@@ -49,7 +49,7 @@ class XmlService:
                     settings['options'] [option.get('name')] = option.get('value')
             images_xml = root.find('images')
             if images_xml is not None:
-                image_count = len(images_xml)    
+                image_count = len(images_xml)
         return settings, image_count
 
     def getImages(self, path= None):

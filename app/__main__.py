@@ -7,7 +7,7 @@ from core.controllers.MainWindow import MainWindow
 #import faulthandler
 import qdarktheme
 from core.services.LoggerService import LoggerService
-from os import path 
+from os import path
 version = '1.3.0'
 def main():
 	app = QApplication(sys.argv)

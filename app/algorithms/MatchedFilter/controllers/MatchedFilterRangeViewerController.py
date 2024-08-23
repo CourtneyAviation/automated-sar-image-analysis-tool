@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 import spectral
-import pandas as pd 
+import pandas as pd
 
 from algorithms.Shared.views.RangeViewer_ui import Ui_ColorRangeViewer
 from core.views.components.QtImageViewer import QtImageViewer
@@ -12,7 +12,7 @@ from PyQt5.QtWidgets import QDialog,QFrame
 
 class MatchedFilterRangeViewer(QDialog, Ui_ColorRangeViewer):
 	"""Controller for the Color Match Ranger Viewer Dialog"""
-	
+
 	def __init__(self,ref_rgb, threshold):
 		"""
 		__init__ constructor for the dialog
@@ -29,7 +29,7 @@ class MatchedFilterRangeViewer(QDialog, Ui_ColorRangeViewer):
 		self.populateImage(palettes["unselected"][2],False)
 		self.populateImage(palettes["unselected"][1],False)
 		self.populateImage(palettes["unselected"][0],False)
-			
+
 	def generatePalettes(self, ref_rgb, threshold):
 		"""
 		generatePalettes generates numpy.ndarrays representing selected and unselected colors
@@ -38,24 +38,24 @@ class MatchedFilterRangeViewer(QDialog, Ui_ColorRangeViewer):
 		:float threshold: The threshold a pixel score must meet to be flagged as a match
 		:return Dictionary: numpy.ndarrays representing the selected and unselected color ranges 
 		"""
-		
+
 		#How big do we want the palettes to be
 		multiplier = 2
 		#180 Hue values
 		x_range = 180*multiplier
 		#256 Light values
 		y_range = 256*multiplier
-		
+
 		#generate the base palettes
 		high = self.generatePalette(x_range, y_range, multiplier, 255)
 		med = self.generatePalette(x_range, y_range, multiplier, 128)
 		low = self.generatePalette(x_range, y_range, multiplier, 64)
-		
+
 		#create the masks representing the selected and unselected colors
 		high_mask = self.generateMask(high, ref_rgb, threshold)
 		med_mask = self.generateMask(med, ref_rgb, threshold)
 		low_mask = self.generateMask(low, ref_rgb, threshold)
-		
+
 		inverse_high_mask = cv2.bitwise_not(high_mask)
 		inverse_med_mask = cv2.bitwise_not(med_mask)
 		inverse_low_mask = cv2.bitwise_not(low_mask)
@@ -96,7 +96,7 @@ class MatchedFilterRangeViewer(QDialog, Ui_ColorRangeViewer):
 				l = round(y/multiplier,0)
 				img[x,y] = [h,l,saturation]
 		return cv2.cvtColor(img, cv2.COLOR_HLS2BGR)
-	
+
 	def populateImage(self, img, selected):
 		"""
 		populateImage generates a QtImageViewer and adds it to an existing layout

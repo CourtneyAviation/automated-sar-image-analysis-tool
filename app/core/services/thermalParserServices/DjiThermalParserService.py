@@ -95,7 +95,7 @@ class DjiThermalParserService:
 		self._dll_dirp = CDLL(self._filepath_dirp)
 		self._dll_dirp_sub = CDLL(self._filepath_dirp_sub)
 		self._dll_iirp = CDLL(self._filepath_iirp)
-		
+
 		self._dirp_set_verbose_level = self._dll_dirp.dirp_set_verbose_level
 		self._dirp_set_verbose_level.argtypes = [c_int]
 		self._dirp_set_verbose_level(DIRP_VERBOSE_LEVEL_NONE)
@@ -143,15 +143,15 @@ class DjiThermalParserService:
 		self._dirp_measure_ex = self._dll_dirp.dirp_measure_ex
 		self._dirp_measure_ex.argtypes = [DIRP_HANDLE, POINTER(c_float), c_int32]
 		self._dirp_measure_ex.restype = c_int32
-		
+
 		self._dirp_set_pseudo_color = self._dll_dirp.dirp_set_pseudo_color
 		self._dirp_set_pseudo_color.argtypes = [DIRP_HANDLE, c_int]
 		self._dirp_set_pseudo_color.restype = c_int32
-		
+
 		self._dirp_process = self._dll_dirp.dirp_process
 		self._dirp_process.argtypes = [DIRP_HANDLE, POINTER(c_uint8), c_int32]
 		self._dirp_process.restype = c_int32
-		
+
 	def temperatures(
 			self,
 			filepath_image: str,
@@ -211,14 +211,14 @@ class DjiThermalParserService:
 				params.emissivity = emissivity
 			if isinstance(reflected_apparent_temperature, (float, int)):
 				params.reflection = reflected_apparent_temperature
-			
+
 			return_status = self._dirp_set_measurement_params(handle, params)
 			assert return_status == self.DIRP_SUCCESS, 'dirp_set_measurement_params error {}:{}'.format(filepath_image, return_status)
 		if self._dtype.__name__ == np.float32.__name__:
 			data = np.zeros(image_width * image_height, dtype=np.float32)
 			data_ptr = data.ctypes.data_as(POINTER(c_float))
 			data_size = c_int32(image_width * image_height * sizeof(c_float))
-			return_status = self._dirp_measure_ex(handle, data_ptr, data_size) 
+			return_status = self._dirp_measure_ex(handle, data_ptr, data_size)
 			assert return_status == self.DIRP_SUCCESS, '_dirp_measure_ex error {}:{}'.format(filepath_image, return_status)
 			temp = np.reshape(data, (image_height, image_width))
 		elif self._dtype.__name__ == np.int16.__name__:
@@ -254,7 +254,7 @@ class DjiThermalParserService:
 		assert return_status == self.DIRP_SUCCESS, 'dirp_create_from_rjpeg error {}:{}'.format(filepath_image, return_status)
 		assert self._dirp_get_rjpeg_version(handle, rjpeg_version) == self.DIRP_SUCCESS
 		assert self._dirp_get_rjpeg_resolution(handle, rjpeg_resolution) == self.DIRP_SUCCESS
-		
+
 		palette = c_int(color_map)
 		return_status = self._dirp_set_pseudo_color(handle, palette)
 		assert return_status == self.DIRP_SUCCESS
@@ -265,9 +265,9 @@ class DjiThermalParserService:
 
 		assert self._dirp_process(handle, data_ptr, data_size) == self.DIRP_SUCCESS
 		img = np.reshape(data, (rjpeg_resolution.height, rjpeg_resolution.width, 3))
-		
+
 		return cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
-	   
+
 	def getColorMap(self, palette:str):
 		"""
 		Takes in a generic name for the palette and returns the platform-specific variation

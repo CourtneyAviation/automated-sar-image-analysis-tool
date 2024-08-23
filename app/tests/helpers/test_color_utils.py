@@ -6,9 +6,9 @@ def test_getColorRange_normal_case():
     r_range, g_range, b_range = 10, 20, 30
     expected_min = (90, 130, 170)
     expected_max = (110, 170, 230)
-    
+
     result_min, result_max = ColorUtils.getColorRange(base_color, r_range, g_range, b_range)
-    
+
     assert result_min == expected_min
     assert result_max == expected_max
 
@@ -17,9 +17,9 @@ def test_getColorRange_exceed_max():
     r_range, g_range, b_range = 10, 20, 30
     expected_min = (240, 220, 200)
     expected_max = (255, 255, 255)
-    
+
     result_min, result_max = ColorUtils.getColorRange(base_color, r_range, g_range, b_range)
-    
+
     assert result_min == expected_min
     assert result_max == expected_max
 
@@ -28,9 +28,9 @@ def test_getColorRange_below_min():
     r_range, g_range, b_range = 15, 25, 35
     expected_min = (0, 0, 0)
     expected_max = (25, 45, 65)
-    
+
     result_min, result_max = ColorUtils.getColorRange(base_color, r_range, g_range, b_range)
-    
+
     assert result_min == expected_min
     assert result_max == expected_max
 
@@ -39,9 +39,9 @@ def test_getColorRange_exact_bounds():
     r_range, g_range, b_range = 0, 0, 0
     expected_min = (0, 0, 0)
     expected_max = (0, 0, 0)
-    
+
     result_min, result_max = ColorUtils.getColorRange(base_color, r_range, g_range, b_range)
-    
+
     assert result_min == expected_min
     assert result_max == expected_max
 
@@ -50,9 +50,8 @@ def test_getColorRange_upper_bounds():
     r_range, g_range, b_range = 0, 0, 0
     expected_min = (255, 255, 255)
     expected_max = (255, 255, 255)
-    
+
     result_min, result_max = ColorUtils.getColorRange(base_color, r_range, g_range, b_range)
-    
+
     assert result_min == expected_min
     assert result_max == expected_max
-

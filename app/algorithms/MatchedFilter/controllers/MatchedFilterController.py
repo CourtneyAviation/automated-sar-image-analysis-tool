@@ -55,7 +55,7 @@ class MatchedFilterController(QWidget, Ui_MatchedFilter, AlgorithmController):
 		if self.selectedColor is not None:
 			self.colorSample.setStyleSheet("background-color: "+self.selectedColor.name())
 			self.viewRangeButton.show()
-	
+
 	def updateThreshold(self):
 		"""
 		updateThreshold click handler for the threshold slider
@@ -63,10 +63,10 @@ class MatchedFilterController(QWidget, Ui_MatchedFilter, AlgorithmController):
 		if self.thresholdSlider.value() == .1:
 			self.thresholdValueLabel.setText('.1')
 		elif self.thresholdSlider.value() == 10:
-			self.thresholdValueLabel.setText('1')   
+			self.thresholdValueLabel.setText('1')
 		else:
 			self.thresholdValueLabel.setText("."+str(self.thresholdSlider.value()))
-	
+
 	def getOptions(self):
 		"""
 		getOptions populates options based on user-selected values

@@ -4,7 +4,7 @@ import logging
 import traceback
 class LoggerService:
 	"""Class to write errors to application log file."""
-	logger = None 
+	logger = None
 	def __init__(self):
 		"""
 		__init__ constructor
@@ -24,10 +24,10 @@ class LoggerService:
 		fileHandler.setFormatter(stdoutFmt)
 		self.logger.addHandler(stdoutHandler)
 		self.logger.addHandler(fileHandler)
-		
+
 	def warning(self, message):
 		self.logger.warning(message)
-	
+
 	def error(self, message):
 		print(traceback.format_exc())
 		self.logger.error(message)

@@ -38,7 +38,7 @@ class AlgorithmService:
 		:return numpy.ndarray, List: numpy.ndarray representing the output image and a list of areas of interest
 		"""
 		raise NotImplementedError
-	
+
 	def circleAreasOfInterest(self, img, contours):
 		"""
 		circleAreasOfInterest augments the input image with circles around areas of interest
@@ -46,14 +46,14 @@ class AlgorithmService:
 		:numpy.ndarray contours: the numpy.ndarray representation of the areas of interest in the image
 		:return numpy.ndarray, List, int: numpy.ndarray representing the output image, a list of areas of interest, and a count of the original areas of interest before they were combined to eliminate overlapping circles
 		"""
-		
+
 		found = False
 		# 3 step process.  Step 1, find all the areas >= the minimum size and mark them on a temporary mask.  Step 2, loop through combining any circles that overlap. Step 3, draw the final list of circles on a copy of the original image.
 
 		if len(contours) > 0:
 			areas_of_interest = []
 			temp_mask =  np.zeros(img.shape[:2],dtype=np.uint8)
-			base_contour_count = 0	
+			base_contour_count = 0
 			for cnt in contours:
 				area = cv2.contourArea(cnt)
 				(x,y),radius = cv2.minEnclosingCircle(cnt)
@@ -72,7 +72,7 @@ class AlgorithmService:
 						item['area'] = area
 						areas_of_interest.append(item)
 						image_copy = cv2.circle(img,center,radius,(self.identifier_color[2],self.identifier_color[1],self.identifier_color[0]),2)
-		
+
 		if found:
 			#if combining overlapping aois, go through that process now.
 			if self.combine_aois:
@@ -99,11 +99,11 @@ class AlgorithmService:
 					item['area'] = area
 					areas_of_interest.append(item)
 					image_copy = cv2.circle(img,center,radius,(self.identifier_color[2],self.identifier_color[1],self.identifier_color[0]),2)
-			#if any results >= the min area are found, go ahead an return them 
+			#if any results >= the min area are found, go ahead an return them
 			return image_copy, areas_of_interest, base_contour_count
 		else :
 			return None, None, None
-		
+
 	def storeImage (self, input_file, output_file, augmented_image, temperature_data = None):
 		path = Path(output_file)
 		if not os.path.exists(path.parents[0]):
@@ -129,7 +129,7 @@ class AlgorithmController:
 		"""
 		self.name = name
 		self.is_thermal = thermal
-		
+
 	def getOptions(self):
 		"""
 		getOptions populates options based on user-selected values
@@ -153,15 +153,15 @@ class AlgorithmController:
 		:Dictionary options: the options to use to set attributes
 		"""
 		raise NotImplementedError
-	
+
 class AnalysisResult:
 	"""Class for the object that will be returned by the processImage method """
-	input_path = None #type = string 
-	output_path = None #type = string 
+	input_path = None #type = string
+	output_path = None #type = string
 	areas_of_interest = None  #type = List
 	base_contour_count = None  # type = int
 	error_message = None  # type = str
-	
+
 	def __init__(self, input_path=None, output_path=None, areas_of_interest=None, base_contour_count=None, error_message = None):
 		self.input_path=input_path
 		self.output_path=output_path
