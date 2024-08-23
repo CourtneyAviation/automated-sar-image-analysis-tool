@@ -19,7 +19,7 @@ class ThermalAnomalyController(QWidget, Ui_ThermalAnomaly, AlgorithmController):
 	def getOptions(self):
 		"""
 		getOptions populates options based on user-selected values
-		
+
 		:return Dictionary: the option names and values
 		"""
 		options = dict()
@@ -31,7 +31,7 @@ class ThermalAnomalyController(QWidget, Ui_ThermalAnomaly, AlgorithmController):
 	def validate(self):
 		"""
 		validate validates that the required values have been provided
-		
+
 		:return String: error message
 		"""
 		return None;
@@ -39,7 +39,7 @@ class ThermalAnomalyController(QWidget, Ui_ThermalAnomaly, AlgorithmController):
 	def loadOptions(self, options):
 		"""
 		loadOptions sets UI elements based on options
-		
+
 		:Dictionary options: the options to use to set attributes
 		"""
 		if 'threshold' in options:

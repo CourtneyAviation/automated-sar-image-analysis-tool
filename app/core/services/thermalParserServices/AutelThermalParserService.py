@@ -86,7 +86,7 @@ class AutelThermalImageParser:
 		:String palette: the name of palette
 
 		:return mixed: returns the int or string representing the color map that can be processed for the indicated camera type.
-			
+
 		"""
 		match palette:
 			case "Inferno (Iron Red)":

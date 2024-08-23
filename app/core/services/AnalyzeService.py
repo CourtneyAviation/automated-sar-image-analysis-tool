@@ -32,7 +32,7 @@ class AnalyzeService(QObject):
 	def __init__(self, id, algorithm, input, output, identifier_color, min_area, num_processes, max_aois, aoi_radius, histogram_reference_path, kmeans_clusters, thermal, options):
 		"""
 		__init__ constructor
-		
+
 		:Int id: numeric id
 		:Dict algorithm: the algorithm to be used for analysis
 		:String input: the path to the input directory containing the images to be processed
@@ -131,7 +131,7 @@ class AnalyzeService(QObject):
 		:String output_dir: the path to the output directory where images will be stored
 		:String hist_ref_path: the path to the histogram matching reference image
 		:Int kmeans_clusters: the number of clusters(colors) to maintain in the image
-		:Bool thermal: is this a thermal image algorithm		
+		:Bool thermal: is this a thermal image algorithm
 		:return numpy.ndarray, List: the numpy.ndarray representation of the image augmented with areas of interest circled and a list of the areas of interest
 		"""
 		img = cv2.imdecode(np.fromfile(full_path, dtype=np.uint8), cv2.IMREAD_UNCHANGED)
@@ -233,7 +233,7 @@ class AnalyzeService(QObject):
 	def addImageToXml(self, img):
 		"""
 		addImageToXml adds an image to the xml document
-		
+
 		:Dictionary img: the full path to the output file and a list of areas of interest
 		"""
 		image = ET.SubElement(self.images_xml, 'image')

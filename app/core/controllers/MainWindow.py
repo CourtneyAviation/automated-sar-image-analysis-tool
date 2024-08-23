@@ -35,7 +35,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 	def __init__(self, theme, version):
 		"""
 		__init__ constructor to build the ADIAT Main Window
-		
+
 		:qdarktheme theme: instance of qdarktheme that allows us to toggle light/dark mode
 		:String version: the app version # to be included in the Main Window title bar
 		"""
@@ -305,7 +305,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 	def addLogEntry(self, text):
 		"""
 		addLogEntry adds a new line of text to the output window
-		
+
 		:String text: the text to add to the output window
 		"""
 		self.outputWindow.appendPlainText(text);
@@ -329,7 +329,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 	def onWorkerMsg(self, text):
 		"""
 		onWorkerMsg calls the addLogEntry method to add a new line to the output window
-		
+
 		:String text: the text to add to the output window
 		"""
 		self.addLogEntry(text)
@@ -338,7 +338,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 	def onWorkerDone(self, id, images_with_aois):
 		"""
 		onWorkerDone  Oncompletion of the analysis process adds a log entry with information specific to the results and updates button states
-		
+
 		:Int id: the id of the calling object
 		:Int images_with_aois: the number of images that include areas of interest
 		"""
@@ -359,7 +359,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 	def showError(self, text):
 		"""
 		showError open a message box showing an error with the provided text
-		
+
 		:String text: the text to be included are the error message
 		"""
 		msg = QMessageBox()
@@ -399,7 +399,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 	def getSettingsFromXml(self, full_path):
 		"""
 		getSettingsFromXml populates the UI with previously executed analysis
-		
+
 		:String full_path: the path to the XML file
 		:return int: the number of images with areas of interest
 		"""
@@ -461,7 +461,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 	def setStartButton(self, enabled):
 		"""
 		setStartButton updates the start button based on the enabled parameter
-		
+
 		:Boolean enabled: True to enable and False to disable the button
 		"""
 		if enabled:
@@ -474,7 +474,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 	def setCancelButton(self, enabled):
 		"""
 		setCancelButton updates the cancel button based on the enabled parameter
-		
+
 		:Boolean enabled: True to enable and False to disable the button
 		"""
 		if enabled:
@@ -487,7 +487,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 	def setViewResultsButton(self, enabled):
 		"""
 		setViewResultsButton updates the view results button based on the enabled parameter
-		
+
 		:Boolean enabled: True to enable and False to disable the button
 		"""
 		if enabled:
@@ -540,7 +540,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 	def updateTheme(self, theme):
 		"""
 		updateTheme updates the application theme based on the theme parameter
-		
+
 		:String theme: Light or Dark
 		"""
 		if theme == 'Light':

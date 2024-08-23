@@ -8,7 +8,7 @@ class LoggerService:
 	def __init__(self):
 		"""
 		__init__ constructor
-		
+
 		"""
 		home_path = os.path.expanduser("~")
 		app_path = home_path + '/AppData/Roaming/ADIAT/'

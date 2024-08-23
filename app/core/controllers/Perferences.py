@@ -8,7 +8,7 @@ class Preferences(QDialog, Ui_Preferences):
 	def __init__(self, parent):
 		"""
 		__init__ constructor to build the preferences dialog
-		
+
 		:MainWindow parent: the parent window for the dialog
 		"""
 		QDialog.__init__(self)

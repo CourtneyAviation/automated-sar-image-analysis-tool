@@ -23,7 +23,7 @@ class ThermalRangeController(QWidget, Ui_ThermalRange, AlgorithmController):
 	def getOptions(self):
 		"""
 		getOptions populates options based on user-selected values
-		
+
 		:return Dictionary: the option names and values
 		"""
 		options = dict()
@@ -54,7 +54,7 @@ class ThermalRangeController(QWidget, Ui_ThermalRange, AlgorithmController):
 	def validate(self):
 		"""
 		validate validates that the required values have been provided
-		
+
 		:return String: error message
 		"""
 		return None;
@@ -62,7 +62,7 @@ class ThermalRangeController(QWidget, Ui_ThermalRange, AlgorithmController):
 	def loadOptions(self, options):
 		"""
 		loadOptions sets UI elements based on options
-		
+
 		:Dictionary options: the options to use to set attributes
 		"""
 		if self.settings_service.getSetting('TemperatureUnit') == 'Fahrenheit':
@@ -93,7 +93,7 @@ class ThermalRangeController(QWidget, Ui_ThermalRange, AlgorithmController):
 	def convertFahrenheitToCelsius(self, value):
 		"""
 		convertFahrenheitToCelsius converts a Fahrenheit value to Celsius
-		
+
 		:int value: the value to be converted
 		:return float: the converted value
 		"""
@@ -102,7 +102,7 @@ class ThermalRangeController(QWidget, Ui_ThermalRange, AlgorithmController):
 	def convertCelsiusToFahrenheit(self, value):
 		"""
 		convertCelsiusToFahrenheit converts a Celsius value to Fahrenheit
-		
+
 		:int value: the value to be converted
 		:return float: the converted value
 		"""

@@ -11,7 +11,7 @@ class SettingsService:
 	def setSetting(self, name, value):
 		"""
 		setSetting sets a given setting in QSettings
-		
+
 		:String name: the name of the setting
 		:String value: the value of the setting
 		"""
@@ -20,7 +20,7 @@ class SettingsService:
 	def getSetting(self,name):
 		"""
 		getSetting retrieves a given setting from QSettings
-		
+
 		:String name: the name of the setting
 		:return String: the value of the setting
 		"""

@@ -10,7 +10,7 @@ class LocationInfo:
 	def getGPS(full_path):
 		"""
 		getGPS retrieves the gps EXIF data stored in an image file
-        
+
         :String full_path: the path to the image file
 		:return Dictionary: contains the decimal latitude and longitude values from the gps data
 		"""

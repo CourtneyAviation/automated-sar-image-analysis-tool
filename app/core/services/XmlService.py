@@ -7,7 +7,7 @@ class XmlService:
     def __init__(self, path = None):
         """
 		__init__ constructor for the service
-        
+
         :String path: path to the XML file.
 		"""
         self.path = path
@@ -15,7 +15,7 @@ class XmlService:
     def getSettings(self, path= None):
         """
 		getSettings parses an ADIAT XML file returning the settings and image count
-        
+
         :String path: path to the XML file.
         :return List(Dictionary), Int: the settings from when the analysis was run and the number of images containing areas of interest
 		"""
@@ -55,7 +55,7 @@ class XmlService:
     def getImages(self, path= None):
         """
 		getImages parses an ADIAT XML file returning the images
-        
+
         :String path: path to the XML file.
         :return List(Dictionary): the images containing areas of interest from when the analysis was run
         """

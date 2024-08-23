@@ -19,7 +19,7 @@ class Viewer(QMainWindow, Ui_Viewer):
 	def __init__(self, images, position_format, temperature_unit, thermal):
 		"""
 		__init__ constructor to build the ADIAT Image Viewer
-		
+
 		:List(Dictionary) images: Images that will be displayed in the viewer
 		:string position_format: The position format in which GPS coordinates will be displayed
 		:string temperature_unit: The unit in which temperature values be displayed
@@ -150,7 +150,7 @@ class Viewer(QMainWindow, Ui_Viewer):
 	def loadAreasofInterest(self, image):
 		"""
 		loadAreasofInterest loads the list of thumbnails representing the areas of interest from the image
-		
+
 		:Dictionary image: a dictionary of information about the image for which areas of interest will be loaded
 		"""
 		#remove any thumbnails already in the list
@@ -240,7 +240,7 @@ class Viewer(QMainWindow, Ui_Viewer):
 	def areaOfInterestClick(self, x, y, img):
 		"""
 		areaOfInterestClick click handler for clicking on one of the area of interest thumbnail
-		
+
 		:Int x: the x coordinate of the cursor when clicked
 		:Int y: the y coordinate of the cursor when clicked
 		:QtImageViewer img: the thumbnail image
@@ -258,7 +258,7 @@ class Viewer(QMainWindow, Ui_Viewer):
 	def generateKml(self, output_path):
 		"""
 		generateKml produces the KML file and saves it to the output_path
-		
+
 		:String output_path: the path where the KML file will be saved
 		"""
 		kml = KMLService();
@@ -278,7 +278,7 @@ class Viewer(QMainWindow, Ui_Viewer):
 	def crop_image(self,img_arr,startx,starty, endx, endy):
 		"""
 		crop_image produces an array representing a portion of a larger input array
-		
+
 		:numpy.ndarray img_array: the array representing the input image
 		:Int startx: the x coordinate of the start position
 		:Int starty: the y coordinate of the start position
@@ -306,7 +306,7 @@ class Viewer(QMainWindow, Ui_Viewer):
 	def showError(self, text):
 		"""
 		showError open a message box showing an error with the provided text
-		
+
 		:String text: the text to be included are the error message
 		"""
 		msg = QMessageBox()
@@ -319,7 +319,7 @@ class Viewer(QMainWindow, Ui_Viewer):
 	def getPosition(self, latitude, longitude):
 		"""
 		getLocation takes in the latitude and longitude in degree, minute, second format and returns the position as a string in the selected coordinate format
-		
+
 		:string latitude: the latitude in degree, minute, second format
 		:string longitude: the longitude in degree, minute, second format
 		:return string: the location

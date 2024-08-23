@@ -15,7 +15,7 @@ class ThermalAnomalyService(AlgorithmService):
 	def __init__(self, identifier, min_area, aoi_radius, combine_aois, options):
 		"""
 		__init__ constructor for the algorithm
-		
+
 		:Tuple(int,int,int) identifier: the RGB values for the color to be used to highlight areas of interest
 		:Int min_area: the size in pixels that an object must meet or exceed to qualify as an area of interest
 		:Int aoi_radius: radius to be added to the min enclosing circle around an area of interest.
@@ -31,7 +31,7 @@ class ThermalAnomalyService(AlgorithmService):
 	def processImage(self, img, full_path, input_dir, output_dir):
 		"""
 		processImage processes a single image using the Thermal Range algorithm
-		
+
 		:numpy.ndarray img: numpy.ndarray representing the subject image
 		:String full_path: the path to the image being analyzed
 		:String input_dir: the base input folder

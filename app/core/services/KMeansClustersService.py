@@ -7,7 +7,7 @@ class KMeansClustersService:
 	def __init__(self, clusters):
 		"""
 		__init__ constructor for the service
-		
+
 		:Int clusters: the number of clusters(colors) for the K-Means Clusters algorithm to return
 		"""
 		self.logger = LoggerService()
@@ -16,7 +16,7 @@ class KMeansClustersService:
 	def generateClusters(self,src):
 		"""
 		generateClusters processes an image and returns one with the defined number of clusters(colors)
-		
+
 		:numpy.ndarray src: the numpy.ndarray representation of an image
 		:return numpy.ndarray: the modified image with the specified number of images
 		"""

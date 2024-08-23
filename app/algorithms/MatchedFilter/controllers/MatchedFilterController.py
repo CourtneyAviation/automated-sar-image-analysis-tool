@@ -70,7 +70,7 @@ class MatchedFilterController(QWidget, Ui_MatchedFilter, AlgorithmController):
 	def getOptions(self):
 		"""
 		getOptions populates options based on user-selected values
-		
+
 		:return Dictionary: the option names and values
 		"""
 		options = dict()
@@ -81,7 +81,7 @@ class MatchedFilterController(QWidget, Ui_MatchedFilter, AlgorithmController):
 	def validate(self):
 		"""
 		validate validates that the required values have been provided
-		
+
 		:return String: error message
 		"""
 		if self.selectedColor is None:
@@ -91,7 +91,7 @@ class MatchedFilterController(QWidget, Ui_MatchedFilter, AlgorithmController):
 	def loadOptions(self, options):
 		"""
 		loadOptions sets UI elements based on options
-		
+
 		:Dictionary options: the options to use to set attributes
 		"""
 		if 'selected_color' in options:

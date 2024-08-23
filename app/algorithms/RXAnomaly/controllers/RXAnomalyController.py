@@ -18,7 +18,7 @@ class RXAnomalyController(QWidget, Ui_RXAnomaly, AlgorithmController):
 	def getOptions(self):
 		"""
 		getOptions populates options based on user-selected values
-		
+
 		:return Dictionary: the option names and values
 		"""
 		options = dict()
@@ -35,7 +35,7 @@ class RXAnomalyController(QWidget, Ui_RXAnomaly, AlgorithmController):
 	def validate(self):
 		"""
 		validate validates that the required values have been provided
-		
+
 		:return String: error message
 		"""
 		return None;
@@ -43,7 +43,7 @@ class RXAnomalyController(QWidget, Ui_RXAnomaly, AlgorithmController):
 	def loadOptions(self, options):
 		"""
 		loadOptions sets UI elements based on options
-		
+
 		:Dictionary options: the options to use to set attributes
 		"""
 		if 'sensitivity' in options:

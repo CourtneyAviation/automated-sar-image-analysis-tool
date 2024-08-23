@@ -16,7 +16,7 @@ class RXAnomalyService(AlgorithmService):
 	def __init__(self, identifier, min_area, aoi_radius, combine_aois, options):
 		"""
 		__init__ constructor for the algorithm
-		
+
 		:Tuple(int,int,int) identifier: the RGB values for the color to be used to highlight areas of interest
 		:Int min_area: the size in pixels that an object must meet or exceed to qualify as an area of interest
 		:Int aoi_radius: radius to be added to the min enclosing circle around an area of interest.
@@ -32,7 +32,7 @@ class RXAnomalyService(AlgorithmService):
 	def processImage(self, img, full_path, input_dir, output_dir):
 		"""
 		processImage processes a single image using the Color Match algorithm
-		
+
 		:numpy.ndarray img: numpy.ndarray representing the subject image
 		:String full_path: the path to the image being analyzed
 		:String input_dir: the base input folder
@@ -50,12 +50,12 @@ class RXAnomalyService(AlgorithmService):
 			"""
 			if self.segments > 1:
 				rx_values = spectral.rx(img)
-				chi_values = chi2.ppf(self.chi_threshold, img.shape[-1])    
+				chi_values = chi2.ppf(self.chi_threshold, img.shape[-1])
 				img_mask =  np.uint8((1 * (rx_values > chi_values)))
 				merge = 255*(combined_mask + img_mask)
 				full_mask = merge.clip(0, 255).astype("uint8")
 			else:
-				full_mask = combined_mask    
+				full_mask = combined_mask
 			"""
 			#make a list of the identified areas.
 			contours, _ = cv2.findContours(combined_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
@@ -70,7 +70,7 @@ class RXAnomalyService(AlgorithmService):
 	def getThreshold(self, sensitivity):
 		"""
 		getThreshold get the chi2 threshold based on a sensitivity value
-		
+
 		:int sensitivity: sensitivity value to convert to chi2 threshold
 		:return float
 		"""
@@ -79,7 +79,7 @@ class RXAnomalyService(AlgorithmService):
 	def splitImage(self, img, segments):
 		"""
 		splitImage divides a single image into mupliple segments.
-		
+
 		:numpy.ndarray img: numpy.ndarray representing the subject image
 		:int segments: the number of image segments we want to split the image into
 		:return List: List lists of numpy.ndarrays representing the segments of the original image.
@@ -235,7 +235,7 @@ class RXAnomalyService(AlgorithmService):
 	def glueImage(self, pieces):
 		"""
 		glueImage combines the pieces of an image into a single image..
-		
+
 		:List pieces: a list of lists containing numpy.ndarrays representing the pieces of the image.
 		:return numpy.ndarray: representing the combined image.
 		"""

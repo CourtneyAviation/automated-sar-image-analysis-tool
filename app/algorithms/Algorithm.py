@@ -10,7 +10,7 @@ class AlgorithmService:
 	def __init__(self, name, identifier_color, min_area, aoi_radius, combine_aois, options, is_thermal = False):
 		"""
 		__init__ constructor
-		
+
 		:String name: the name of the algorithm to be used for analysis
 		:Tuple(int,int,int) identifier_color: the RGB values for the color to be used to highlight areas of interest
 		:Int min_area: the size in pixels that an object must meet or exceed to qualify as an area of interest
@@ -30,7 +30,7 @@ class AlgorithmService:
 	def processImage(self, img, full_path, input_dir, output_dir):
 		"""
 		processImage processes a single image file using the algorithm
-		
+
 		:numpy.ndarray img: numpy.ndarray representing the subject image
 		:String full_path: the path to the image being analyzed
 		:String input_dir: the base input folder
@@ -123,7 +123,7 @@ class AlgorithmController:
 	def __init__(self, name, thermal = False):
 		"""
 		__init__ constructor
-		
+
 		:String name: the name of the algorithm to be used for analysis
 		:Bool thermal: is this algorithm for thermal images
 		"""
@@ -133,7 +133,7 @@ class AlgorithmController:
 	def getOptions(self):
 		"""
 		getOptions populates options based on user-selected values
-		
+
 		:return Dictionary: the option names and values
 		"""
 		raise NotImplementedError
@@ -141,7 +141,7 @@ class AlgorithmController:
 	def validate(self):
 		"""
 		validate validates that the required values have been provided
-		
+
 		:return String: error message
 		"""
 		raise NotImplementedError
@@ -149,7 +149,7 @@ class AlgorithmController:
 	def loadOptions(self, options):
 		"""
 		loadOptions sets UI elements based on options
-		
+
 		:Dictionary options: the options to use to set attributes
 		"""
 		raise NotImplementedError

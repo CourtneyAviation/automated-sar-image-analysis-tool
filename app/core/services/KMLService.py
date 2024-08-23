@@ -11,7 +11,7 @@ class KMLService:
 	def addPoints(self, points):
 		"""
 		addPoints adds a list of points to the KML document
-		
+
 		:List(Dictionary) points: the points to be added to the KML document
 		"""
 		for point in points:
@@ -20,7 +20,7 @@ class KMLService:
 	def saveKml(self, path):
 		"""
 		saveKml saves the KML file
-		
+
 		:String path: the location where the KML document will be stored
 		"""
 		self.kml.save(path)

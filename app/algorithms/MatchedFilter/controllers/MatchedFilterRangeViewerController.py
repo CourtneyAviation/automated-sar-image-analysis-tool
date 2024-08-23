@@ -16,7 +16,7 @@ class MatchedFilterRangeViewer(QDialog, Ui_ColorRangeViewer):
 	def __init__(self,ref_rgb, threshold):
 		"""
 		__init__ constructor for the dialog
-		
+
 		:Tuple(int, int, int) ref_rgb: The reference color to be matched
 		:float threshold: The threshold a pixel score must meet to be flagged as a match
 		"""
@@ -33,10 +33,10 @@ class MatchedFilterRangeViewer(QDialog, Ui_ColorRangeViewer):
 	def generatePalettes(self, ref_rgb, threshold):
 		"""
 		generatePalettes generates numpy.ndarrays representing selected and unselected colors
-		
+
 		:Tuple(int, int, int) ref_rgb: The reference color to be matched
 		:float threshold: The threshold a pixel score must meet to be flagged as a match
-		:return Dictionary: numpy.ndarrays representing the selected and unselected color ranges 
+		:return Dictionary: numpy.ndarrays representing the selected and unselected color ranges
 		"""
 
 		#How big do we want the palettes to be
@@ -71,7 +71,7 @@ class MatchedFilterRangeViewer(QDialog, Ui_ColorRangeViewer):
 	def generateMask(self, img, ref_rgb, threshold):
 		"""
 		generateMask generates numpy.ndarrays with a mask representing pixels that are a match for the reference color
-		
+
 		:numpy.ndarray img: numpy.ndarray representing the subject image
 		Tuple(int, int, int) ref_rgb: The reference color to be matched
 		:float threshold: The threshold a pixel score must meet to be flagged as a match
@@ -83,7 +83,7 @@ class MatchedFilterRangeViewer(QDialog, Ui_ColorRangeViewer):
 	def generatePalette(self, x_range, y_range, multiplier, saturation):
 		"""
 		generatePalette generate numpy.ndarray representing the HSL palette at a given saturation
-		
+
 		:Int x_range: the height of the palette
 		:Int y_range: the width of the palette
 		:return numpy.ndarray: numpy.ndarray representing the HSL palette
@@ -100,7 +100,7 @@ class MatchedFilterRangeViewer(QDialog, Ui_ColorRangeViewer):
 	def populateImage(self, img, selected):
 		"""
 		populateImage generates a QtImageViewer and adds it to an existing layout
-		
+
 		:numpy.ndarray img: numpy.ndarray representation of the image
 		:Boolean selected: determines which layout to add the widget to
 		"""

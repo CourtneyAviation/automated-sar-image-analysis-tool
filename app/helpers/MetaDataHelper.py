@@ -17,7 +17,7 @@ class MetaDataHelper:
 	def transferExifPiexif(originFile, destinationFile):
 		"""
 		transferExifPiexif copies the exif information of an image file to another image file using piexif
-		
+
 		:String originFile: the path to the source file
 		:String destinationFile: the path to the destination file
 		"""
@@ -32,7 +32,7 @@ class MetaDataHelper:
 	def transferExifPil(originFile, destinationFile):
 		"""
 		transferExifPil copies the exif information of an image file to another image file using PIL
-		
+
 		:String originFile: the path to the source file
 		:String destinationFile: the path to the destination file
 		"""
@@ -49,7 +49,7 @@ class MetaDataHelper:
 	def transferExifExiftool(originFile, destinationFile):
 		"""
 		transferExifExiftool copies the exif information of an image file to another image file using Exiftool
-		
+
 		:String originFile: the path to the source file
 		:String destinationFile: the path to the destination file
 		"""
@@ -61,7 +61,7 @@ class MetaDataHelper:
 	def transferXmpExiftool(originFile, destinationFile):
 		"""
 		transferXmpExiftool copies the xmp information of an image file to another image file using Exiftool
-		
+
 		:String originFile: the path to the source file
 		:String destinationFile: the path to the destination file
 		"""
@@ -72,7 +72,7 @@ class MetaDataHelper:
 	def transferAll(originFile, destinationFile):
 		"""
 		transferAll copies the exif and xmp information of an image file to another image file using Exiftool
-		
+
 		:String originFile: the path to the source file
 		:String destinationFile: the path to the destination file
 		"""
@@ -84,7 +84,7 @@ class MetaDataHelper:
 	def transferTemperatureData(data, destinationFile):
 		"""
 		transferTemperatureData copies the temperature data from the original image to the Note field on the augmented image.
-		
+
 		:numpy.ndarray data: the path to the source file
 		:String destinationFile: the path to the destination file
 		"""

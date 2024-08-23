@@ -9,7 +9,7 @@ class HistogramNormalizationService:
 	def __init__(self, hist_ref_path):
 		"""
 		__init__ constructor for the service
-		
+
 		:String hist_ref_path: the path to the reference image
 		"""
 		self.logger = LoggerService()
@@ -20,7 +20,7 @@ class HistogramNormalizationService:
 	def matchHistograms(self,src):
 		"""
 		matchHistograms runs skimage.exposure to match the histagram of a subjec image to a reference image
-		
+
 		:numpy.ndarray src: the numpy.ndarray representation of the subject image
 		:return numpy.ndarray: the modified subject image
 		"""

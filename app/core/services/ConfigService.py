@@ -8,7 +8,7 @@ class ConfigService:
     def __init__(self, path):
         """
 		__init__ constructor for the service
-        
+
         :String path: path to the config file.
 		"""
         with open(path) as f:

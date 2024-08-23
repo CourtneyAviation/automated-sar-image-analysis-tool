@@ -13,7 +13,7 @@ class ColorRangeRangeViewer(QDialog, Ui_ColorRangeViewer):
 	def __init__(self, min_rgb, max_rgb):
 		"""
 		__init__ constructor for the dialog
-		
+
 		:Tuple(int, int, int) min_rgb: The minimum color in the selected range
 		:Tuple(int, int, int) max_rgb: The maximum color in the selected range
 		"""
@@ -30,10 +30,10 @@ class ColorRangeRangeViewer(QDialog, Ui_ColorRangeViewer):
 	def generatePalettes(self, min_rgb, max_rgb):
 		"""
 		generatePalettes generates numpy.ndarrays representing selected and unselected colors
-		
+
 		:Tuple(int, int, int) min_rgb: The minimum color in the selected range
 		:Tuple(int, int, int) max_rgb: The maximum color in the selected range
-		:return Dictionary: numpy.ndarrays representing the selected and unselected color ranges 
+		:return Dictionary: numpy.ndarrays representing the selected and unselected color ranges
 		"""
 
 		cv_lower_limit = np.array([min_rgb[2], min_rgb[1], min_rgb[0]], dtype=np.uint8)
@@ -71,11 +71,11 @@ class ColorRangeRangeViewer(QDialog, Ui_ColorRangeViewer):
 	def generatePalette(self, x_range, y_range, multiplier, saturation):
 		"""
 		generatePalette generate numpy.ndarray representing the HSL palette at a given saturation
-		
+
 		:Int x_range: the height of the palette
 		:Int y_range: the width of the palette
 		:Int multiplier: cooresponds to the size of the palette
-		:Int multiplier: cooresponds to the size of the palette		
+		:Int multiplier: cooresponds to the size of the palette
 		:return numpy.ndarray: numpy.ndarray representing the HSL palette
 		"""
 		img = np.zeros((x_range,y_range,3), np.uint8)
@@ -90,7 +90,7 @@ class ColorRangeRangeViewer(QDialog, Ui_ColorRangeViewer):
 	def populateImage(self, img, selected):
 		"""
 		populateImage generates a QtImageViewer and adds it to an existing layout
-		
+
 		:numpy.ndarray img: numpy.ndarray representation of the image
 		:Boolean selected: determines which layout to add the widget to
 		"""

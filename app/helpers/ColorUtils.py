@@ -7,7 +7,7 @@ class ColorUtils:
     def getColorRange(rgb, r_range, g_range, b_range):
         """
 		getColorRange takes a base color and then returns a min and max based on ranges provided for the red, green, and blue color channels
-        
+
         :Tuple(int,int,int): the rgb values representing the base color
         :Int r_range: the range for the red channel
         :Int g_range: the range for the green channel

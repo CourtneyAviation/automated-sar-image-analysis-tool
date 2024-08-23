@@ -20,7 +20,7 @@ class VideoParserService(QObject):
 	def __init__(self, id, video, srt, output, interval):
 		"""
 		__init__ constructor
-		
+
 		:Int id: numeric id
 		:String video: the path to the video file to be processed
 		:String str: the path to the srt file to be processed

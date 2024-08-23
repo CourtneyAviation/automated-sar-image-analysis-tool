@@ -11,7 +11,7 @@ class VideoParser(QDialog, Ui_VideoParser):
 	def __init__(self):
 		"""
 		__init__ constructor for the dialog
-		
+
 		"""
 		QDialog.__init__(self)
 		self.setupUi(self)
@@ -122,7 +122,7 @@ class VideoParser(QDialog, Ui_VideoParser):
 	def onWorkerMsg(self, text):
 		"""
 		onWorkerMsg calls the addLogEntry method to add a new line to the output window
-		
+
 		:String text: the text to add to the output window
 		"""
 		self.addLogEntry(text)
@@ -131,7 +131,7 @@ class VideoParser(QDialog, Ui_VideoParser):
 	def onWorkerDone(self, id, image_count):
 		"""
 		onWorkerDone  Oncompletion of the analysis process adds a log entry with information specific to the results and updates button states
-		
+
 		:Int id: the id of the calling object
 		:Int images_with_aois: the number of images that include areas of interest
 		"""
@@ -148,7 +148,7 @@ class VideoParser(QDialog, Ui_VideoParser):
 	def addLogEntry(self, text):
 		"""
 		addLogEntry adds a new line of text to the output window
-		
+
 		:String text: the text to add to the output window
 		"""
 		self.outputWindow.appendPlainText(text);
@@ -156,7 +156,7 @@ class VideoParser(QDialog, Ui_VideoParser):
 	def setStartButton(self, enabled):
 		"""
 		setStartButton updates the start button based on the enabled parameter
-		
+
 		:Boolean enabled: True to enable and False to disable the button
 		"""
 		if enabled:
@@ -169,7 +169,7 @@ class VideoParser(QDialog, Ui_VideoParser):
 	def setCancelButton(self, enabled):
 		"""
 		setCancelButton updates the cancel button based on the enabled parameter
-		
+
 		:Boolean enabled: True to enable and False to disable the button
 		"""
 		if enabled:
