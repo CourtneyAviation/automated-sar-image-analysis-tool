@@ -10,7 +10,7 @@ define vrun
 	@source $(vb)activate && $(1)
 endef
 
-.PHONY: shell install clean
+.PHONY: shell install pipenv clean
 
 shell: install
 	$(call vrun, pipenv shell)
@@ -18,6 +18,7 @@ shell: install
 install: $(vb)pipenv
 	$(call vrun, pipenv install --dev)
 
+pipenv: $(vb)pipenv
 $(vb)pipenv: $(venv)/lib/$(PY)/site-packages/setuptools
 	$(call vrun, pip install pipenv)
 
@@ -28,5 +29,5 @@ $(vb)activate:
 	$(PY) -m venv $(venv)
 
 clean:
-	rm Pipfile.lock
-	rm --force --recursive $(venv)
+	-rm Pipfile.lock
+	-rm -fr $(venv)
