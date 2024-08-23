@@ -21,9 +21,12 @@ PyExifTool = "*"
 
 [dev-packages]
 pyqt-distutils = "*"
-qt5-tools = "*"
 PyInstaller = "*"
 pytest-qt = "*"
+
+# modern MacOS can't use ancient qt5-application in PyPI
+qt5-tools = {version = "*", markers = "sys_platform != 'darwin'"}
+# TODO: build this from source?
 
 [requires]
 python_version = "3.11"
